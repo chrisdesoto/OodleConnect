@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Oodle Connect</title>
+</h:head>
+<h:body class="grey-text text-darken-4">
+
+<h:form id="appForm">
+
+  <header>
+  	<h:panelGroup id="sideNavGroup">
+	  <nav class="indigo grey-text text-lighten-4">
+	    <div class="container">
+	      <div class="nav-wrapper">	
+	        <a class="brand-logo"><i class="material-icons left">my_location</i><h:outputText value="#{appViewController.navMessage}"/></a>
+	        <a id="mobile-icon" href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+	      </div>
+	      <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a class="modal-trigger" href="#modal1"><i class="material-icons left">info</i>About This App</a></li>
+	        <li><a href="http://oodle.com/"><i class="material-icons left">shopping_basket</i>Oodle Marketplace</a></li>
+	      </ul>
+	      <ul id="slide-out" class="side-nav fixed">
+	        <li><a class="app-name">Oodle Connect</a></li>
+	        <li id="realEstate-link">
+	        	<h:commandLink action="#{appViewController.setDisplay('realEstate')}">
+	        		<i class="material-icons left">map</i>Real Estate
+	        		<f:ajax render="renderGroup sideNavGroup" onevent="resetFormFields" />
+	        	</h:commandLink>	        	
+	        </li>
+	        <li id="rentals-link">
+	        	<h:commandLink action="#{appViewController.setDisplay('rentals')}">
+	        		<i class="material-icons left">home</i>Rentals
+	        		<f:ajax listener="#{appViewController.setRentalsCall()}" render="renderGroup sideNavGroup" onevent="resetFormFields"/>
+	        	</h:commandLink>
+	        </li>
+	        <li id="forSale-link">
+	        	<h:commandLink action="#{appViewController.setDisplay('forSale')}">
+	        		<i class="material-icons left">monetization_on</i>For Sale
+	        		<f:ajax listener="#{appViewController.setForSaleCall()}" render="renderGroup sideNavGroup" onevent="resetFormFields"/>
+	        	</h:commandLink>
+	        </li>
+	        <li id="jobs-link">
+	        	<h:commandLink action="#{appViewController.setDisplay('jobs')}">
+	        		<i class="material-icons left">group</i>Jobs
+	        		<f:ajax listener="#{appViewController.setJobsCall()}" render="renderGroup sideNavGroup" onevent="resetFormFields"/>
+	        	</h:commandLink>
+	        </li>
+	        <li id="services-link">
+	        	<h:commandLink action="#{appViewController.setDisplay('services')}">
+	        		<i class="material-icons left">local_shipping</i>Services
+	        		<f:ajax listener="#{appViewController.setServicesCall()}" render="renderGroup sideNavGroup" onevent="resetFormFields"/>
+	        	</h:commandLink>
+	        </li>
+	      </ul>
+	      <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+	      <span id="displayed" style="display:none;">#{appViewController.display}</span>
+	    </div>
+	  </nav>
+	</h:panelGroup>  
+  </header>
+
+  <main>
+    <h:panelGroup id="renderGroup">
+	  <h:panelGroup id="realEstateGroup" name="realEstate" rendered="#{appViewController.display == 'realEstate'}">
+		  <ui:insert name="realEsate">
+			<ui:include src="realEstate.xhtml" />
+	  	  </ui:insert>
+	  </h:panelGroup>
+	  <h:panelGroup id="rentalsGroup" name="rentals" rendered="#{appViewController.display == 'rentals'}">
+		  <ui:insert name="rentals">
+			<ui:include src="rentals.xhtml" />
+	  	  </ui:insert>
+	  </h:panelGroup>	
+	  <h:panelGroup id="forSaleGroup" name="forSale" rendered="#{appViewController.display == 'forSale'}">
+		  <ui:insert name="forSale">
+			<ui:include src="forSale.xhtml" />
+	  	  </ui:insert>
+	  </h:panelGroup>	  
+	  <h:panelGroup id="jobsGroup" name="jobs" rendered="#{appViewController.display == 'jobs'}">
+		  <ui:insert name="jobs">
+			<ui:include src="jobs.xhtml" />
+	  	  </ui:insert>
+	  </h:panelGroup>		   
+	  <h:panelGroup id="servicesGroup" name="jobs" rendered="#{appViewController.display == 'services'}">
+		  <ui:insert name="services">
+			<ui:include src="services.xhtml" />
+	  	  </ui:insert>
+	  </h:panelGroup>	
+	</h:panelGroup>
+  </main>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Oodle Connect</h4>
+      <p>This app was built with Java Server Faces, Materialize and jQuery running on an Apache Tomcat server.</p>
+      <p><a href="#!" class="modal-action modal-close btn right">close</a></p>
+    </div>
+  </div>
+  
+</h:form>
+  
+    
+<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"/>
+<link rel="stylesheet" href="css/main.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $('.tooltipped').tooltip({delay: 50});
+  $('select').material_select();
+  $('.modal-trigger').leanModal();
+  $('.button-collapse').sideNav();
+  fadeResults();
+  Materialize.updateTextFields();
+  $("#realEstate-link").css("background-color", "#eee");
+  setActivePage();
+});
+
+jQuery(document).ready(function($){
+  $('.go-to-page-input').find('input').keypress(function(e){
+	    if ( e.which == 13 ) // Enter key = keycode 13
+	    {
+	    	this.parentNode.getElementsByClassName('goToPageButton')[0].click();
+	    	return false;
+	    }
+  }); 	
+});
+
+function setActivePage(){
+	
+	var pages = $(".pagination li a");
+	for (i = 1; i &lt; pages.length; i++){
+		if(pages.get(i).text == $(".currentPage")[0].innerHTML){	
+			pages.get(i).parentNode.style.backgroundColor = '#DC4040';
+			pages.get(i).style.color = '#FFF';
+		}
+	}
+
+}
+
+function setClick(){
+	
+	var displayLink = "#" + $("#displayed").text() + "-link";
+	
+	$(".side-nav li").css("background-color", "transparent");
+	
+	$(displayLink).css("background-color", "#eee");
+	
+};
+
+function setTrigger(data){
+	if (data.status == "success"){
+		$('.modal-trigger, .modal2-trigger').leanModal();
+		fadeResults();
+		setActivePage();
+	}
+};
+
+function fadeResults(){
+	if($(".results li").length > 0){
+		$(".results").fadeIn();
+		$(".pagination").fadeIn();
+		$(".go-to-page").fadeIn();
+	}
+};
+
+function showModal(data){
+    if (data.status == "success"){
+    	var name = $('main span:first-child span:first-child').attr('id');
+    	var name = "#" + name.substring(8, name.length-5) + "-modal";
+        console.log(name);
+    	$(name).openModal();
+    }
+};
+
+function resetFormFields(data){
+	if (data.status == "success"){
+		$('select').material_select();
+		$('.tooltipped').tooltip({delay: 50});
+		$('.button-collapse').sideNav();
+		Materialize.updateTextFields();
+		setTrigger(data);
+		setClick();
+	}
+};
+          
+</script>
+          
+</h:body>
+</h:html>

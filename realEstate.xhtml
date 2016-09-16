@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head></h:head>
+<h:body>
+    <ui:composition>
+	    <div class="container">
+		 	<div class="row">
+			  <div class="col m6 l4 input-field">
+				<h:inputText type="text" id="realEstate-keywordsInclude" value="#{appViewController.realEstateCall.query}"/>
+				<label for="appForm:realEstate-keywordsInclude">Keyword(s)
+					<a id="realEstate-keyword-tooltip" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Separate keywords with whitespace. Use (-) in front of each word you wish to exclude. Ex: house blue -pool"><i class="material-icons">info</i></a>
+				</label>										
+			  </div>
+			  <div class="col m6 l3 input-field">
+				<h:inputText id="realEstate-selectLocation" value="#{appViewController.realEstateCall.location}">
+				   <f:validateLength for="appForm:realEstate-selectLocation" minimum="2" maximum="50" />	
+				</h:inputText>
+				<label class="active" for="appForm:realEstate-selectLocation">City/Zip Code</label>										
+			  </div>
+			  <div class="col m3 l3 input-field">
+				<h:panelGroup id="realEstate-stateGroup">
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.region == 'usa'}">			      
+				    <h:selectOneMenu id="realEstate-selectStateUS" value="#{appViewController.realEstateCall.state}">
+						<c:forEach var="item" items="#{appViewController.subLocationUS}">
+						  <f:selectItem itemValue="#{item.key}" itemLabel="#{item.value}"/>
+						</c:forEach>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:realEstate-selectStateUS">State</label>										
+				  </h:panelGroup>
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.region == 'canada'}">
+				    <h:selectOneMenu id="realEstate-selectStateCAN" value="#{appViewController.realEstateCall.state}">
+						<c:forEach var="item" items="#{appViewController.subLocationCAN}">
+						  <f:selectItem itemValue="#{item.key}" itemLabel="#{item.value}"/>
+						</c:forEach>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:realEstate-selectStateCAN">Province/Territory</label>															
+				  </h:panelGroup>				  
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.region == 'uk'}">
+				    <h:selectOneMenu id="realEstate-selectStateUK" value="#{appViewController.realEstateCall.state}">
+						<c:forEach var="item" items="#{appViewController.subLocationUK}">
+						  <f:selectItem itemValue="#{item.key}" itemLabel="#{item.value}"/>
+						</c:forEach>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:realEstate-selectStateUK">Country</label>															
+				  </h:panelGroup>
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.region == 'ireland'}">
+				    <h:selectOneMenu id="realEstate-selectStateIR" value="#{appViewController.realEstateCall.state}">
+						<c:forEach var="item" items="#{appViewController.subLocationIR}">
+						  <f:selectItem itemValue="#{item.key}" itemLabel="#{item.value}"/>
+						</c:forEach>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:realEstate-selectStateIR">Province</label>															
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.region == 'india'}">
+				    <h:selectOneMenu id="realEstate-selectStateIND" value="#{appViewController.realEstateCall.state}">
+						<c:forEach var="item" items="#{appViewController.subLocationIN}">
+						  <f:selectItem itemValue="#{item.key}" itemLabel="#{item.value}"/>
+						</c:forEach>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:realEstate-selectStateIND">State</label>															
+				  </h:panelGroup>					  
+				</h:panelGroup>
+			  </div>
+			  <div class="col m3 l2 input-field">
+			    <h:selectOneMenu id="realEstate-selectRegion" value="#{appViewController.realEstateCall.region}">
+					<f:selectItem itemLabel="United States" itemValue="usa"/>
+					<f:selectItem itemLabel="Canada" itemValue="canada"/>
+					<f:selectItem itemLabel="United Kingdom" itemValue="uk"/>
+					<f:selectItem itemLabel="Ireland" itemValue="ireland"/>
+					<f:selectItem itemLabel="India" itemValue="india"/>
+					<f:ajax execute="realEstate-selectRegion" render="realEstate-stateGroup" onevent="function(){$('select').material_select();}"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:realEstate-selectRegion">Country</label>	
+			  </div>
+			  <div class="col m3 l3 input-field">
+				<h:selectOneMenu id="realEstate-selectSubCategory" value="#{appViewController.realEstateCall.subCategory}">
+					<f:selectItem itemLabel="All Real Estate" itemValue=""/>
+					<f:selectItem itemLabel="Home" itemValue="/home"/>
+					<f:selectItem itemLabel="Mobile" itemValue="/mobile"/>
+					<f:selectItem itemLabel="Condo" itemValue="/condo"/>
+					<f:selectItem itemLabel="Land" itemValue="/land"/>
+					<f:selectItem itemLabel="Commercial" itemValue="/commercial"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:realEstate-selectSubCategory">Category</label>													
+			  </div>
+			  <div class="col m3 l3 input-field">
+				<h:selectOneMenu id="realEstate-selectRadius" value="#{appViewController.realEstateCall.radius}">
+					<f:selectItem itemLabel="0" itemValue="0"/>
+					<f:selectItem itemLabel="10" itemValue="10"/>
+					<f:selectItem itemLabel="20" itemValue="20"/>
+					<f:selectItem itemLabel="30" itemValue="30"/>
+					<f:selectItem itemLabel="40" itemValue="40"/>
+					<f:selectItem itemLabel="50" itemValue="50"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:realEstate-selectRadius">Radius</label>													
+			  </div>	 				  	
+			  <div class="col m6 l4 input-field">
+				<h:selectOneMenu id="realEstate-selectSort" value="#{appViewController.realEstateCall.sort}">
+					<f:selectItem itemLabel="Distance: Closest to Farthest" itemValue="distance"/>
+					<f:selectItem itemLabel="Distance: farthest to closest" itemValue="distance_reverse"/>
+					<f:selectItem itemLabel="Price: Lowest to Highest" itemValue="price"/>
+					<f:selectItem itemLabel="Price: Highest to Lowest" itemValue="price_reverse"/>
+					<f:selectItem itemLabel="Creation Time: Newest to Oldest" itemValue="ctime_reverse"/>
+					<f:selectItem itemLabel="Creation Time: Oldest to Newest" itemValue="ctime"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:realEstate-selectSort">Sort</label>																
+			  </div>	
+			  <div class="col m6 l2 input-field">
+				<h:selectOneMenu id="realEstate-selectNumOfItems" value="#{appViewController.realEstateCall.num}">
+					<f:selectItem itemLabel="12" itemValue="12"/>
+					<f:selectItem itemLabel="24" itemValue="24"/>
+					<f:selectItem itemLabel="36" itemValue="36"/>
+					<f:selectItem itemLabel="48" itemValue="48"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:realEstate-selectNumOfItems">Number of Listings</label>																			
+			  </div>	
+			</div>
+		 	<div class="row">
+			  <div id="realEstate-button-col" class="col l6 m6 s6 button-col">
+				<h:commandButton class="btn waves-effect waves-indigo indigo" id="realEstate-submit" value="Find Homes">				
+					<f:ajax execute="realEstateGroup" render="realEstate-status realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" listener="#{appViewController.realEstateCall.callAPIWithStart1}" onevent="setTrigger"/>
+				</h:commandButton>
+			  </div>
+			  <div id="realEstate-status-col" class="col l6 m6 s6 status-col">	
+				<p class="right"><h:outputText id="realEstate-status" class="status" value="#{appViewController.realEstateCall.statusMessage}"/></p>					
+			  </div>		  						
+			</div>	
+			<div class="row">
+			  <h:panelGroup id="realEstate-pagination1" class="col l6 offset-l3 m6 offset-m3">
+			    <h:outputText class="currentPage" value="#{appViewController.realEstateCall.pager.currentPage}"/>
+			    <ul class="pagination center">
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.realEstateCall.firstPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">first_page</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">first_page</i></a>					    
+					  </li>
+				  </h:panelGroup>			    
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.realEstateCall.previousPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_left</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">chevron_left</i></a>					    
+					  </li>
+				  </h:panelGroup>			    
+			        <c:forEach var="page" items="#{appViewController.realEstateCall.pager.listedPages}">
+			          <li class="waves-effect"><h:commandLink value="#{page}" action="#{appViewController.realEstateCall.callAPI(e)}"><f:ajax listener="#{appViewController.realEstateCall.setPage(page)}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/></h:commandLink></li>
+				     </c:forEach>
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage lt appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.realEstateCall.nextPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_right</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">chevron_right</i></a>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage lt appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.realEstateCall.lastPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">last_page</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>					  
+				  <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">last_page</i></a>
+				    </li>
+				  </h:panelGroup>					  
+				</ul>
+			  </h:panelGroup>
+			  <h:panelGroup id="realEstate-goToPageInput1" class="col l2 m2 offset-l1 offset-m1 input-field go-to-page-input go-to-page">			    
+			    <h:inputText type="text" id="realEstate-goToPageNumber1" immediate="true" binding="#{realEstateInput1}"/>				
+				<label class="active" for="appForm:realEstate-goToPageNumber1">Go To Page</label>
+				<h:commandLink class="btn waves-effect waves-indigo indigo goToPageButton" id="realEstate-goToPageButton1" actionListener="#{appViewController.realEstateCall.setPage(realEstateInput1.value)}" action="#{appViewController.realEstateCall.callAPI(e)}">				
+					<f:ajax execute="realEstate-goToPageNumber1" render="realEstate-status realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/>
+					<i class="material-icons">forward</i>
+				</h:commandLink>			  
+			  </h:panelGroup>	  
+			</div>
+			<div class="row">			
+				<h:panelGroup id="realEstate-outputGroup" layout="block" class="col l12 m12 s12">
+				    <ul id="realEstate-results" class="collection z-depth-3 results">
+					  <c:forEach var="listItem" items="#{appViewController.realEstateCall.listings}">
+					    <li class="collection-item avatar">
+				      	  <h:graphicImage value="#{listItem.images[0].src}" alt="#{listItem.images[0].alt}"/>
+					      <h5 class="truncate"><h:outputText value="#{listItem.attributes.priceDisplay}"/> - <h:outputText value="#{listItem.title}"/></h5>
+					      <hr/>
+					      <p><h:outputText value="#{listItem.body}"/></p>
+					      <p id="realEstate-collection-links" class="collection-links">
+					      	<h:commandLink class="btn green waves-effect waves-green">
+					        	<f:ajax event="click" listener="#{appViewController.realEstateCall.setModalListing(listItem)}" render="realEstate-listingModal" onevent="showModal"/>
+					        	<i class="material-icons">view_list</i>More Info
+					      	</h:commandLink>
+					      	<h:outputLink value="#{listItem.url}" class="btn waves-effect waves-red"><i class="material-icons">send</i>View This Listing</h:outputLink>
+					      </p>
+					    </li>
+				  	  </c:forEach>					   
+					</ul>
+				</h:panelGroup>		
+		    </div>
+		    <div class="row">
+			  <h:panelGroup id="realEstate-pagination2" class="col l6 offset-l3 m6 offset-m3">
+			    <ul class="pagination center">
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.realEstateCall.firstPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">first_page</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">first_page</i></a>					    
+					  </li>
+				  </h:panelGroup>				    
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.realEstateCall.previousPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_left</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">chevron_left</i></a>
+					  </li>
+				  </h:panelGroup>
+			        <c:forEach var="page" items="#{appViewController.realEstateCall.pager.listedPages}">
+			          <li class="waves-effect"><h:commandLink value="#{page}" action="#{appViewController.realEstateCall.callAPI(e)}"><f:ajax listener="#{appViewController.realEstateCall.setPage(page)}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/></h:commandLink></li>
+				     </c:forEach>
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage lt appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.realEstateCall.nextPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_right</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">chevron_right</i></a>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">chevron_right</i></a>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage lt appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.realEstateCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.realEstateCall.lastPage()}" render="realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/><i class="material-icons">last_page</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>					  
+				  <h:panelGroup rendered="#{appViewController.realEstateCall.pager.currentPage == appViewController.realEstateCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">last_page</i></a>
+				    </li>
+				  </h:panelGroup>				  				  
+				</ul>
+			  </h:panelGroup>
+			  <h:panelGroup id="realEstate-goToPageInput2" class="col l2 m2 offset-l1 offset-m1 input-field go-to-page-input go-to-page">			    
+			    <h:inputText type="text" id="realEstate-goToPageNumber2" immediate="true" binding="#{realEstateInput2}"/>
+				<label class="active" for="appForm:realEstate-goToPageNumber2">Go To Page</label>
+				<h:commandLink class="btn waves-effect waves-indigo indigo goToPageButton" id="realEstate-goToPageButton2" actionListener="#{appViewController.realEstateCall.setPage(realEstateInput2.value)}" action="#{appViewController.realEstateCall.callAPI(e)}">				
+					<f:ajax execute="realEstate-goToPageNumber2" render="realEstate-status realEstate-outputGroup realEstate-pagination1 realEstate-pagination2" onevent="setTrigger"/>
+					<i class="material-icons">forward</i>
+				</h:commandLink>			  
+			  </h:panelGroup>
+			</div>	
+		</div>	
+		
+	  
+	    <h:panelGroup id="realEstate-listingModal" layout="block">
+		  <div id="realEstate-modal" class="modal listingModal">
+		    <div class="modal-content">
+		      <div class="row">
+		      	<div class="col l12">
+		      		<h5><h:outputText id="realEstate-modal-listing-title" value="#{appViewController.realEstateCall.modalListing.title}"/></h5>
+		      		<hr/>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="col l4 s12">
+		      		<h:graphicImage id="realEstate-modal-listing-image" class="modal-listing-image" value="#{appViewController.realEstateCall.modalListing.images[0].src}" alt="#{appViewController.realEstateCall.modalListing.images[0].alt}"/>
+		      	</div>
+		      	<div class="col l4 s12"> 
+		      		<p><strong>Price: </strong><h:outputText id="realEstate-modal-listing-price" value="#{appViewController.realEstateCall.modalListing.attributes.priceDisplay}"/></p>
+		      		<p><strong>Address: </strong><h:outputText id="realEstate-modal-listing-address" value="#{appViewController.realEstateCall.modalListing.location.address}"/></p>
+					<p><strong>City: </strong><h:outputText id="realEstate-modal-listing-city" value="#{appViewController.realEstateCall.modalListing.location.name}"/></p>
+					<p><strong>State: </strong><h:outputText id="realEstate-modal-listing-state" value="#{appViewController.realEstateCall.modalListing.location.state}"/></p>
+		      	</div>
+		      	<div class="col l4 s12">
+		      		<p><strong>Condition: </strong><h:outputText id="realEstate-modal-listing-condition" value="#{appViewController.realEstateCall.modalListing.attributes.condition}"/></p>	      	 
+		      		<p><strong>Bathrooms: </strong><h:outputText id="realEstate-modal-listing-bathrooms" value="#{appViewController.realEstateCall.modalListing.attributes.bathrooms}"/></p>
+		      		<p><strong>Bedrooms: </strong><h:outputText id="realEstate-modal-listing-bedrooms" value="#{appViewController.realEstateCall.modalListing.attributes.bedrooms}"/></p>
+		      		<p><strong>Sq. Feet: </strong><h:outputText id="realEstate-modal-listing-sq-ft" value="#{appViewController.realEstateCall.modalListing.attributes.squareFeet}"/></p>
+		      	</div>
+			  </div>
+		      <div class="row">	      	
+		      	<div class="col l12">
+		      		<p id="realEstate-modal-info" class="modal-info"><strong>Information: </strong><h:outputText id="realEstate-modal-listing-body" value="#{appViewController.realEstateCall.modalListing.body}"/></p>
+		      	</div>
+			  </div>
+		      <div class="row">	      	
+		      	<div class="col l12">
+		      		<p class="center"><h:outputLink value="#{appViewController.realEstateCall.modalListing.url}" class="btn waves-effect waves-green center"><i class="material-icons">send</i>View This Listing</h:outputLink></p>
+		      	</div>
+		      </div>
+		    </div>  
+		  </div>
+	    </h:panelGroup>
+    </ui:composition>
+</h:body>
+</h:html>

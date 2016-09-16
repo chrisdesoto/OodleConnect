@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head></h:head>
+<h:body>
+    <ui:composition>
+	    <div class="container">
+		 	<div class="row">
+			  <div class="input-field col l4 m6">
+				<h:inputText type="text" id="forSale-keywordsInclude" value="#{appViewController.forSaleCall.query}"/>
+				<label for="appForm:forSale-keywordsInclude">Keyword(s)
+					<a id="forSale-keyword-tooltip" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Separate keywords with whitespace. Use (-) in front of each word you wish to exclude. Ex: house blue -pool"><i class="material-icons">info</i></a>
+				</label>										
+			  </div>
+			  <div class="input-field col l3 m6">
+				<h:inputText id="forSale-selectLocation" value="#{appViewController.forSaleCall.location}">
+				   <f:validateLength for="appForm:forSale-selectLocation" minimum="2" maximum="50" />	
+				</h:inputText>
+				<label class="active" for="appForm:forSale-selectLocation">City/Zip Code</label>										
+			  </div>
+			  <div class="col l3 m3 input-field">
+				<h:panelGroup id="forSale-stateGroup">
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.region == 'usa'}">
+				    <h:selectOneMenu id="forSale-selectStateUS" value="#{appViewController.forSaleCall.state}">
+						<f:selectItem itemValue="AL" itemLabel="Alabama"/>
+						<f:selectItem itemValue="AK" itemLabel="Alaska"/>
+						<f:selectItem itemValue="AZ" itemLabel="Arizona"/>
+						<f:selectItem itemValue="AR" itemLabel="Arkansas"/>
+						<f:selectItem itemValue="CA" itemLabel="California"/>
+						<f:selectItem itemValue="CO" itemLabel="Colorado"/>
+						<f:selectItem itemValue="CT" itemLabel="Connecticut"/>
+						<f:selectItem itemValue="DE" itemLabel="Delaware"/>
+						<f:selectItem itemValue="DC" itemLabel="District Of Columbia"/>
+						<f:selectItem itemValue="FL" itemLabel="Florida"/>
+						<f:selectItem itemValue="GA" itemLabel="Georgia"/>
+						<f:selectItem itemValue="HI" itemLabel="Hawaii"/>
+						<f:selectItem itemValue="ID" itemLabel="Idaho"/>
+						<f:selectItem itemValue="IL" itemLabel="Illinois"/>
+						<f:selectItem itemValue="IN" itemLabel="Indiana"/>
+						<f:selectItem itemValue="IA" itemLabel="Iowa"/>
+						<f:selectItem itemValue="KS" itemLabel="Kansas"/>
+						<f:selectItem itemValue="KY" itemLabel="Kentucky"/>
+						<f:selectItem itemValue="LA" itemLabel="Louisiana"/>
+						<f:selectItem itemValue="ME" itemLabel="Maine"/>
+						<f:selectItem itemValue="MD" itemLabel="Maryland"/>
+						<f:selectItem itemValue="MA" itemLabel="Massachusetts"/>
+						<f:selectItem itemValue="MI" itemLabel="Michigan"/>
+						<f:selectItem itemValue="MN" itemLabel="Minnesota"/>
+						<f:selectItem itemValue="MS" itemLabel="Mississippi"/>
+						<f:selectItem itemValue="MO" itemLabel="Missouri"/>
+						<f:selectItem itemValue="MT" itemLabel="Montana"/>
+						<f:selectItem itemValue="NE" itemLabel="Nebraska"/>
+						<f:selectItem itemValue="NV" itemLabel="Nevada"/>
+						<f:selectItem itemValue="NH" itemLabel="New Hampshire"/>
+						<f:selectItem itemValue="NJ" itemLabel="New Jersey"/>
+						<f:selectItem itemValue="NM" itemLabel="New Mexico"/>
+						<f:selectItem itemValue="NY" itemLabel="New York"/>
+						<f:selectItem itemValue="NC" itemLabel="North Carolina"/>
+						<f:selectItem itemValue="ND" itemLabel="North Dakota"/>
+						<f:selectItem itemValue="OH" itemLabel="Ohio"/>
+						<f:selectItem itemValue="OK" itemLabel="Oklahoma"/>
+						<f:selectItem itemValue="OR" itemLabel="Oregon"/>
+						<f:selectItem itemValue="PA" itemLabel="Pennsylvania"/>
+						<f:selectItem itemValue="RI" itemLabel="Rhode Island"/>
+						<f:selectItem itemValue="SC" itemLabel="South Carolina"/>
+						<f:selectItem itemValue="SD" itemLabel="South Dakota"/>
+						<f:selectItem itemValue="TN" itemLabel="Tennessee"/>
+						<f:selectItem itemValue="TX" itemLabel="Texas"/>
+						<f:selectItem itemValue="UT" itemLabel="Utah"/>
+						<f:selectItem itemValue="VT" itemLabel="Vermont"/>
+						<f:selectItem itemValue="VA" itemLabel="Virginia"/>
+						<f:selectItem itemValue="WA" itemLabel="Washington"/>
+						<f:selectItem itemValue="WV" itemLabel="West Virginia"/>
+						<f:selectItem itemValue="WI" itemLabel="Wisconsin"/>
+						<f:selectItem itemValue="WY" itemLabel="Wyoming"/>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:forSale-selectStateUS">State</label>										
+				  </h:panelGroup>
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.region == 'canada'}">
+				    <h:selectOneMenu id="forSale-selectStateCAN" value="#{appViewController.forSaleCall.state}">
+						<f:selectItem itemValue="AB" itemLabel="Alberta"/>
+						<f:selectItem itemValue="BC" itemLabel="British Columbia"/>
+						<f:selectItem itemValue="MB" itemLabel="Manitoba"/>
+						<f:selectItem itemValue="NB" itemLabel="New Brunswick"/>
+						<f:selectItem itemValue="NL" itemLabel="Newfoundland and Labrador"/>
+						<f:selectItem itemValue="NS" itemLabel="Nova Scotia"/>
+						<f:selectItem itemValue="ON" itemLabel="Ontario"/>
+						<f:selectItem itemValue="PE" itemLabel="Prince Edward Island"/>
+						<f:selectItem itemValue="QC" itemLabel="Quebec"/>
+						<f:selectItem itemValue="SK" itemLabel="Saskatchewan"/>
+						<f:selectItem itemValue="NT" itemLabel="Northwest Territories"/>
+						<f:selectItem itemValue="NU" itemLabel="Nunavut"/>
+						<f:selectItem itemValue="YT" itemLabel="Yukon"/>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:forSale-selectStateCAN">Province/Territory</label>															
+				  </h:panelGroup>				  
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.region == 'uk'}">
+				    <h:selectOneMenu id="forSale-selectStateUK" value="#{appViewController.forSaleCall.state}">
+						<f:selectItem itemValue="GBR" itemLabel="England"/>
+						<f:selectItem itemValue="GBR" itemLabel="Wales"/>
+						<f:selectItem itemValue="GBR" itemLabel="Scotland"/>
+						<f:selectItem itemValue="GBR" itemLabel="Northern Ireland"/>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:forSale-selectStateUK">Country</label>															
+				  </h:panelGroup>
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.region == 'ireland'}">
+				    <h:selectOneMenu id="forSale-selectStateIR" value="#{appViewController.forSaleCall.state}">
+						<f:selectItem itemValue="connacht" itemLabel="Connacht"/>
+						<f:selectItem itemValue="leinster" itemLabel="Leinster"/>
+						<f:selectItem itemValue="munster" itemLabel="Munster"/>
+						<f:selectItem itemValue="ulster" itemLabel="Ulster"/>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:forSale-selectStateIR">Province</label>															
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.region == 'india'}">
+				    <h:selectOneMenu id="forSale-selectStateIND" value="#{appViewController.forSaleCall.state}">
+						<f:selectItem itemValue="Andaman and Nicobar Islands" itemLabel="Andaman and Nicobar Islands"/>
+						<f:selectItem itemValue="Andhra Pradesh" itemLabel="Andhra Pradesh"/>
+						<f:selectItem itemValue="Arunachal Pradesh" itemLabel="Arunachal Pradesh"/>
+						<f:selectItem itemValue="Assam" itemLabel="Assam"/>
+						<f:selectItem itemValue="Bihar" itemLabel="Bihar"/>
+						<f:selectItem itemValue="Chandigarh" itemLabel="Chandigarh"/>
+						<f:selectItem itemValue="Chhattisgarh" itemLabel="Chhattisgarh"/>
+						<f:selectItem itemValue="Dadra and Nagar Haveli" itemLabel="Dadra and Nagar Haveli"/>
+						<f:selectItem itemValue="Daman and Diu" itemLabel="Daman and Diu"/>
+						<f:selectItem itemValue="Delhi" itemLabel="Delhi"/>
+						<f:selectItem itemValue="Goa" itemLabel="Goa"/>
+						<f:selectItem itemValue="Gujarat" itemLabel="Gujarat"/>
+						<f:selectItem itemValue="Haryana" itemLabel="Haryana"/>
+						<f:selectItem itemValue="Himachal Pradesh" itemLabel="Himachal Pradesh"/>
+						<f:selectItem itemValue="Jammu and Kashmir" itemLabel="Jammu and Kashmir"/>
+						<f:selectItem itemValue="Jharkhand" itemLabel="Jharkhand"/>
+						<f:selectItem itemValue="Karnataka" itemLabel="Karnataka"/>
+						<f:selectItem itemValue="Kerala" itemLabel="Kerala"/>
+						<f:selectItem itemValue="Lakshadweep" itemLabel="Lakshadweep"/>
+						<f:selectItem itemValue="Madhya Pradesh" itemLabel="Madhya Pradesh"/>
+						<f:selectItem itemValue="Maharashtra" itemLabel="Maharashtra"/>
+						<f:selectItem itemValue="Manipur" itemLabel="Manipur"/>
+						<f:selectItem itemValue="Meghalaya" itemLabel="Meghalaya"/>
+						<f:selectItem itemValue="Mizoram" itemLabel="Mizoram"/>
+						<f:selectItem itemValue="Nagaland" itemLabel="Nagaland"/>
+						<f:selectItem itemValue="Orissa" itemLabel="Orissa"/>
+						<f:selectItem itemValue="Pondicherry" itemLabel="Pondicherry"/>
+						<f:selectItem itemValue="Punjab" itemLabel="Punjab"/>
+						<f:selectItem itemValue="Rajasthan" itemLabel="Rajasthan"/>
+						<f:selectItem itemValue="Sikkim" itemLabel="Sikkim"/>
+						<f:selectItem itemValue="Tamil Nadu" itemLabel="Tamil Nadu"/>
+						<f:selectItem itemValue="Tripura" itemLabel="Tripura"/>
+						<f:selectItem itemValue="Uttaranchal" itemLabel="Uttaranchal"/>
+						<f:selectItem itemValue="Uttar Pradesh" itemLabel="Uttar Pradesh"/>
+						<f:selectItem itemValue="West Bengal" itemLabel="West Bengal"/>
+					</h:selectOneMenu>
+					<label class="active" for="appForm:forSale-selectStateIND">State</label>															
+				  </h:panelGroup>					  
+				</h:panelGroup>							
+			  </div>
+			  <div class="col l2 m3 input-field">
+			    <h:selectOneMenu id="forSale-selectRegion" value="#{appViewController.forSaleCall.region}">
+					<f:selectItem itemLabel="United States" itemValue="usa"/>
+					<f:selectItem itemLabel="Canada" itemValue="canada"/>
+					<f:selectItem itemLabel="United Kingdom" itemValue="uk"/>
+					<f:selectItem itemLabel="Ireland" itemValue="ireland"/>
+					<f:selectItem itemLabel="India" itemValue="india"/>
+					<f:ajax execute="forSale-selectRegion" render="forSale-stateGroup" onevent="function(){$('select').material_select();}"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:forSale-selectRegion">Country</label>	
+			  </div>
+			  <div class="col l3 m3 s12 input-field">
+				<h:selectOneMenu id="forSale-selectSubCategory" value="#{appViewController.forSaleCall.subCategory}">
+					<f:selectItem itemLabel="All Merchandise" itemValue=""/>
+					<f:selectItem itemLabel="Appliances" itemValue="/appliance"/>
+					<f:selectItem itemLabel="Auctions, Estate, Yard &amp; Garage Sales" itemValue="/sale"/>
+					<f:selectItem itemLabel="Baby &amp; Kid Stuff" itemValue="/kid"/>					
+					<f:selectItem itemLabel="Books &amp; Magazines" itemValue="/book"/>
+					<f:selectItem itemLabel="Office &amp; Business" itemValue="/business"/>
+					<f:selectItem itemLabel="Clothes &amp; Accessories" itemValue="/clothes"/>
+					<f:selectItem itemLabel="Collectibles" itemValue="/collectible"/>
+					<f:selectItem itemLabel="Computers &amp; Accessories" itemValue="/computer"/>
+					<f:selectItem itemLabel="Electronics" itemValue="/electronics"/>
+					<f:selectItem itemLabel="Free" itemValue="/free"/>
+					<f:selectItem itemLabel="Furniture" itemValue="/furniture"/>
+					<f:selectItem itemLabel="Home &amp; Garden" itemValue="/home"/>
+					<f:selectItem itemLabel="Jewelry" itemValue="/jewelry"/>
+					<f:selectItem itemLabel="Musical Instruments" itemValue="/music"/>
+					<f:selectItem itemLabel="Other" itemValue="/other"/>
+					<f:selectItem itemLabel="Sporting Goods &amp; Bicycles" itemValue="/sport"/>
+					<f:selectItem itemLabel="Other" itemValue="/other"/>
+					<f:selectItem itemLabel="Tickets" itemValue="/tickets"/>
+					<f:selectItem itemLabel="Tools" itemValue="/tools"/>
+					<f:selectItem itemLabel="Video Games" itemValue="/video_game"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:forSale-selectSubCategory">Category</label>													
+			  </div>
+			  <div class="col l3 m3 s12 input-field">
+				<h:selectOneMenu id="forSale-selectRadius" value="#{appViewController.forSaleCall.radius}">
+					<f:selectItem itemLabel="0" itemValue="0"/>
+					<f:selectItem itemLabel="10" itemValue="10"/>
+					<f:selectItem itemLabel="20" itemValue="20"/>
+					<f:selectItem itemLabel="30" itemValue="30"/>
+					<f:selectItem itemLabel="40" itemValue="40"/>
+					<f:selectItem itemLabel="50" itemValue="50"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:forSale-selectRadius">Radius</label>													
+			  </div>	 				  	
+			  <div class="col l4 m6 s12 input-field">
+				<h:selectOneMenu id="forSale-selectSort" value="#{appViewController.forSaleCall.sort}">
+					<f:selectItem itemLabel="Distance: Closest to Farthest" itemValue="distance"/>
+					<f:selectItem itemLabel="Distance: farthest to closest" itemValue="distance_reverse"/>
+					<f:selectItem itemLabel="Price: Lowest to Highest" itemValue="price"/>
+					<f:selectItem itemLabel="Price: Highest to Lowest" itemValue="price_reverse"/>
+					<f:selectItem itemLabel="Creation Time: Newest to Oldest" itemValue="ctime_reverse"/>
+					<f:selectItem itemLabel="Creation Time: Oldest to Newest" itemValue="ctime"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:forSale-selectSort">Sort</label>																
+			  </div>	
+			  <div class="col l2 m6 s12 input-field">
+				<h:selectOneMenu id="forSale-selectNumOfItems" value="#{appViewController.forSaleCall.num}">
+					<f:selectItem itemLabel="12" itemValue="12"/>
+					<f:selectItem itemLabel="24" itemValue="24"/>
+					<f:selectItem itemLabel="36" itemValue="36"/>
+					<f:selectItem itemLabel="48" itemValue="48"/>
+				</h:selectOneMenu>
+				<label class="active" for="appForm:forSale-selectNumOfItems">Number of Listings</label>																			
+			  </div>	
+			</div>
+		 	<div class="row">
+			  <div id="forSale-button-col" class="col l6 m6 s6 button-col">
+				<h:commandButton class="btn waves-effect waves-indigo indigo" id="forSale-submit" value="Find Homes">				
+					<f:ajax execute="forSaleGroup" render="forSale-status forSale-outputGroup forSale-pagination1 forSale-pagination2" listener="#{appViewController.forSaleCall.callAPIWithStart1}" onevent="setTrigger"/>
+				</h:commandButton>
+			  </div>
+			  <div id="forSale-status-col" class="col l6 m6 s6 status-col">	
+				<p class="right"><h:outputText id="forSale-status" class="status" value="#{appViewController.forSaleCall.statusMessage}"/></p>	
+			  </div>		  						
+			</div>	
+			<div class="row">
+			  <h:panelGroup id="forSale-pagination1" class="col l6 offset-l3 m6 offset-m3">
+			    <h:outputText class="currentPage" value="#{appViewController.forSaleCall.pager.currentPage}"/>
+			    <ul class="pagination center">
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.forSaleCall.firstPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">first_page</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">first_page</i></a>					    
+					  </li>
+				  </h:panelGroup>			    
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.forSaleCall.previousPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_left</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">chevron_left</i></a>					    
+					  </li>
+				  </h:panelGroup>			    
+			        <c:forEach var="page" items="#{appViewController.forSaleCall.pager.listedPages}">
+			          <li class="waves-effect"><h:commandLink value="#{page}" action="#{appViewController.forSaleCall.callAPI(e)}"><f:ajax listener="#{appViewController.forSaleCall.setPage(page)}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/></h:commandLink></li>
+				     </c:forEach>
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage lt appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.forSaleCall.nextPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_right</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">chevron_right</i></a>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage lt appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.forSaleCall.lastPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">last_page</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>					  
+				  <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">last_page</i></a>
+				    </li>
+				  </h:panelGroup>					  
+				</ul>
+			  </h:panelGroup>
+			  <h:panelGroup id="forSale-goToPageInput1" class="col l2 m2 offset-l1 offset-m1 input-field go-to-page-input go-to-page">			    
+			    <h:inputText type="text" id="forSale-goToPageNumber1" immediate="true" binding="#{forSaleInput1}"/>				
+				<label class="active" for="appForm:forSale-goToPageNumber1">Go To Page</label>
+				<h:commandLink class="btn waves-effect waves-indigo indigo goToPageButton" id="forSale-goToPageButton1" actionListener="#{appViewController.forSaleCall.setPage(forSaleInput1.value)}" action="#{appViewController.forSaleCall.callAPI(e)}">				
+					<f:ajax execute="forSale-goToPageNumber1" render="forSale-status forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/>
+					<i class="material-icons">forward</i>
+				</h:commandLink>			  
+			  </h:panelGroup>	  
+			</div>
+			<div class="row">			
+				<h:panelGroup id="forSale-outputGroup" layout="block" class="col l12 m12 s12">
+				    <ul id="forSale-results" class="collection z-depth-3 results">
+					  <c:forEach var="listItem" items="#{appViewController.forSaleCall.listings}">
+					    <li class="collection-item avatar">
+				      	  <h:graphicImage value="#{listItem.images[0].src}" alt="#{listItem.images[0].alt}"/>
+					      <h5 class="truncate"><h:outputText value="#{listItem.attributes.priceDisplay}"/> - <h:outputText value="#{listItem.title}"/></h5>
+					      <hr/>
+					      <p><h:outputText value="#{listItem.body}"/></p>
+					      <p id="forSale-collection-links" class="collection-links">
+					      	<h:commandLink class="btn green waves-effect waves-green">
+					        	<f:ajax event="click" listener="#{appViewController.forSaleCall.setModalListing(listItem)}" render="forSale-listingModal" onevent="showModal"/>
+					        	<i class="material-icons">view_list</i>More Info
+					      	</h:commandLink>
+					      	<h:outputLink value="#{listItem.url}" class="btn waves-effect waves-red"><i class="material-icons">send</i>View This Listing</h:outputLink>
+					      </p>
+					    </li>
+				  	  </c:forEach>					   
+					</ul>
+				</h:panelGroup>		
+		    </div>
+		    <div class="row">
+			  <h:panelGroup id="forSale-pagination2" class="col l6 offset-l3 m6 offset-m3">
+			    <ul class="pagination center">
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.forSaleCall.firstPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">first_page</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">first_page</i></a>					    
+					  </li>
+				  </h:panelGroup>				    
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage gt 1}">
+					  <li class="waves-effect">
+					    <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+					      <f:ajax listener="#{appViewController.forSaleCall.previousPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_left</i>
+					    </h:commandLink>
+					  </li>
+				  </h:panelGroup>		
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == 1}">
+					  <li class="disabled">
+					    <a class="arrow"><i class="material-icons">chevron_left</i></a>
+					  </li>
+				  </h:panelGroup>
+			        <c:forEach var="page" items="#{appViewController.forSaleCall.pager.listedPages}">
+			          <li class="waves-effect"><h:commandLink value="#{page}" action="#{appViewController.forSaleCall.callAPI(e)}"><f:ajax listener="#{appViewController.forSaleCall.setPage(page)}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/></h:commandLink></li>
+				     </c:forEach>
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage lt appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.forSaleCall.nextPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">chevron_right</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">chevron_right</i></a>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">chevron_right</i></a>
+				    </li>
+				  </h:panelGroup>	
+			      <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage lt appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="waves-effect">
+				      <h:commandLink class="arrow" action="#{appViewController.forSaleCall.callAPI(e)}">
+				        <f:ajax listener="#{appViewController.forSaleCall.lastPage()}" render="forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/><i class="material-icons">last_page</i>
+				      </h:commandLink>
+				    </li>
+				  </h:panelGroup>					  
+				  <h:panelGroup rendered="#{appViewController.forSaleCall.pager.currentPage == appViewController.forSaleCall.pager.numberOfPages}">				  
+				    <li class="disabled">
+				      <a class="arrow"><i class="material-icons">last_page</i></a>
+				    </li>
+				  </h:panelGroup>				  				  
+				</ul>
+			  </h:panelGroup>
+			  <h:panelGroup id="forSale-goToPageInput2" class="col l2 m2 offset-l1 offset-m1 input-field go-to-page-input go-to-page">			    
+			    <h:inputText type="text" id="forSale-goToPageNumber2" immediate="true" binding="#{forSaleInput2}"/>
+				<label class="active" for="appForm:forSale-goToPageNumber2">Go To Page</label>
+				<h:commandLink class="btn waves-effect waves-indigo indigo goToPageButton" id="forSale-goToPageButton2" actionListener="#{appViewController.forSaleCall.setPage(forSaleInput2.value)}" action="#{appViewController.forSaleCall.callAPI(e)}">				
+					<f:ajax execute="appForm:forSale-goToPageNumber2" render="forSale-status forSale-outputGroup forSale-pagination1 forSale-pagination2" onevent="setTrigger"/>
+					<i class="material-icons">forward</i>
+				</h:commandLink>			  
+			  </h:panelGroup>
+			</div>	
+		</div>	
+		
+	  
+	    <h:panelGroup id="forSale-listingModal" layout="block">
+		  <div id="forSale-modal" class="modal listingModal">
+		    <div class="modal-content">
+		      <div class="row">
+		      	<div class="col l12">
+		      		<h5><h:outputText id="forSale-modal-listing-title" value="#{appViewController.forSaleCall.modalListing.title}"/></h5>
+		      		<hr/>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="col l4 s12">
+		      		<h:graphicImage id="forSale-modal-listing-image" class="modal-listing-image" value="#{appViewController.forSaleCall.modalListing.images[0].src}" alt="#{appViewController.forSaleCall.modalListing.images[0].alt}"/>
+		      	</div>
+		      	<div class="col l8 s12"> 
+		      		<p><strong>Price: </strong><h:outputText id="forSale-modal-listing-price" value="#{appViewController.forSaleCall.modalListing.attributes.priceDisplay}"/></p>
+		      		<p><strong>Address: </strong><h:outputText id="forSale-modal-listing-address" value="#{appViewController.forSaleCall.modalListing.location.address}"/></p>
+					<p><strong>City: </strong><h:outputText id="forSale-modal-listing-city" value="#{appViewController.forSaleCall.modalListing.location.name}"/></p>
+					<p><strong>State: </strong><h:outputText id="forSale-modal-listing-state" value="#{appViewController.forSaleCall.modalListing.location.state}"/></p>
+		      	</div>
+			  </div>
+		      <div class="row">	      	
+		      	<div class="col l12">
+		      		<p id="forSale-modal-info" class="modal-info"><strong>Information: </strong><h:outputText id="forSale-modal-listing-body" value="#{appViewController.forSaleCall.modalListing.body}"/></p>
+		      	</div>
+			  </div>
+		      <div class="row">	      	
+		      	<div class="col l12">
+		      		<p class="center"><h:outputLink value="#{appViewController.forSaleCall.modalListing.url}" class="btn waves-effect waves-green center"><i class="material-icons">send</i>View This Listing</h:outputLink></p>
+		      	</div>
+		      </div>
+		    </div>  
+		  </div>
+	    </h:panelGroup>
+    </ui:composition>
+</h:body>
+</h:html>
