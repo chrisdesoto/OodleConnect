@@ -1,3 +1,4 @@
+$ = jQuery;
 
 $(document).ready(function() {
     $('.tooltipped').tooltip({delay: 50});
@@ -24,7 +25,7 @@ function initGoToPageEnterKey(){
 function setActivePage(){
 
     var pages = $(".pagination li a");
-    for (i = 1; i &lt; pages.length; i++){
+    for (var i = 1; i < pages.length; i++){
         if(pages.get(i).text == $(".currentPage")[0].innerHTML){
             pages.get(i).parentNode.style.backgroundColor = '#DC4040';
             pages.get(i).style.color = '#FFF';
