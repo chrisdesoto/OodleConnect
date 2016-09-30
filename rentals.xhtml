@@ -210,7 +210,7 @@
 			</div>
 		 	<div class="row">
 			  <div id="rentals-button-col" class="col l6 m6 s6 button-col">
-				<h:commandButton class="btn waves-effect waves-indigo indigo" id="rentals-submit" value="Find Homes">				
+				<h:commandButton class="btn waves-effect waves-indigo indigo" id="rentals-submit" value="Find Rentals">				
 					<f:ajax execute="rentalsGroup" render="rentals-status rentals-outputGroup rentals-pagination1 rentals-pagination2" listener="#{appViewController.rentalsCall.callAPIWithStart1}" onevent="setTrigger"/>
 				</h:commandButton>
 			  </div>
@@ -218,6 +218,23 @@
 				<p class="right"><h:outputText id="rentals-status" class="status" value="#{appViewController.rentalsCall.statusMessage}"/></p>	
 			  </div>		  						
 			</div>	
+			<div class="row">
+			  <div class="col l12 m12 s12 center">
+			    <div class="preloader-wrapper big active">
+				  <div class="spinner-layer spinner-blue-only">
+			        <div class="circle-clipper left">
+			          <div class="circle"></div>
+			        </div>
+			        <div class="gap-patch">
+			          <div class="circle"></div>
+			        </div>
+			        <div class="circle-clipper right">
+			         <div class="circle"></div>
+			        </div>
+				  </div>
+			    </div>
+			  </div>
+			</div>					
 			<div class="row">
 			  <h:panelGroup id="rentals-pagination1" class="col l6 offset-l3 m6 offset-m3">
 			    <h:outputText class="currentPage" value="#{appViewController.rentalsCall.pager.currentPage}"/>
@@ -294,11 +311,11 @@
 					      <hr/>
 					      <p><h:outputText value="#{listItem.body}"/></p>
 					      <p id="rentals-collection-links" class="collection-links">
-					      	<h:commandLink class="btn green waves-effect waves-green">
+					      	<h:commandLink class="btn green waves-effect">
 					        	<f:ajax event="click" listener="#{appViewController.rentalsCall.setModalListing(listItem)}" render="rentals-listingModal" onevent="showModal"/>
 					        	<i class="material-icons">view_list</i>More Info
 					      	</h:commandLink>
-					      	<h:outputLink value="#{listItem.url}" class="btn waves-effect waves-red"><i class="material-icons">send</i>View This Listing</h:outputLink>
+					      	<h:outputLink value="#{listItem.url}" class="btn waves-effect"><i class="material-icons">send</i>View This Listing</h:outputLink>
 					      </p>
 					    </li>
 				  	  </c:forEach>					   
@@ -382,22 +399,22 @@
 		  <div id="rentals-modal" class="modal listingModal">
 		    <div class="modal-content">
 		      <div class="row">
-		      	<div class="col l12">
+		      	<div class="col l12 m12 s12">
 		      		<h5><h:outputText id="rentals-modal-listing-title" value="#{appViewController.rentalsCall.modalListing.title}"/></h5>
 		      		<hr/>
 		      	</div>
 		      </div>
 		      <div class="row">
-		      	<div class="col l4 s12">
+		      	<div class="col l4 m12 s12">
 		      		<h:graphicImage id="rentals-modal-listing-image" class="modal-listing-image" value="#{appViewController.rentalsCall.modalListing.images[0].src}" alt="#{appViewController.rentalsCall.modalListing.images[0].alt}"/>
 		      	</div>
-		      	<div class="col l4 s12"> 
+		      	<div class="col l4 m12 s12"> 
 		      		<p><strong>Price: </strong><h:outputText id="rentals-modal-listing-price" value="#{appViewController.rentalsCall.modalListing.attributes.priceDisplay}"/></p>
 		      		<p><strong>Address: </strong><h:outputText id="rentals-modal-listing-address" value="#{appViewController.rentalsCall.modalListing.location.address}"/></p>
 					<p><strong>City: </strong><h:outputText id="rentals-modal-listing-city" value="#{appViewController.rentalsCall.modalListing.location.name}"/></p>
 					<p><strong>State: </strong><h:outputText id="rentals-modal-listing-state" value="#{appViewController.rentalsCall.modalListing.location.state}"/></p>
 		      	</div>
-		      	<div class="col l4 s12">
+		      	<div class="col l4 m12 s12">
 		      		<p><strong>Condition: </strong><h:outputText id="rentals-modal-listing-condition" value="#{appViewController.rentalsCall.modalListing.attributes.condition}"/></p>	      	 
 		      		<p><strong>Bathrooms: </strong><h:outputText id="rentals-modal-listing-bathrooms" value="#{appViewController.rentalsCall.modalListing.attributes.bathrooms}"/></p>
 		      		<p><strong>Bedrooms: </strong><h:outputText id="rentals-modal-listing-bedrooms" value="#{appViewController.rentalsCall.modalListing.attributes.bedrooms}"/></p>
@@ -405,13 +422,13 @@
 		      	</div>
 			  </div>
 		      <div class="row">	      	
-		      	<div class="col l12">
+		      	<div class="col l12 m12 s12">
 		      		<p id="rentals-modal-info" class="modal-info"><strong>Information: </strong><h:outputText id="rentals-modal-listing-body" value="#{appViewController.rentalsCall.modalListing.body}"/></p>
 		      	</div>
 			  </div>
 		      <div class="row">	      	
-		      	<div class="col l12">
-		      		<p class="center"><h:outputLink value="#{appViewController.rentalsCall.modalListing.url}" class="btn waves-effect waves-green center"><i class="material-icons">send</i>View This Listing</h:outputLink></p>
+		      	<div class="col l12 m12 s12">
+		      		<p class="center"><h:outputLink value="#{appViewController.rentalsCall.modalListing.url}" class="btn waves-effect center"><i class="material-icons">send</i>View This Listing</h:outputLink></p>
 		      	</div>
 		      </div>
 		    </div>  

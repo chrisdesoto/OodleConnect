@@ -33,6 +33,12 @@ public class Pagination {
 		if(page > 0 && page <= numberOfPages){
 			currentPage = page;
 		}
+		else if(page <= 0){
+			currentPage = 1;
+		}
+		else{
+			currentPage = numberOfPages;
+		}
 		return String.valueOf(startVals[currentPage - 1]);
 	}
 	

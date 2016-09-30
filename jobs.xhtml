@@ -264,7 +264,7 @@
 			</div>
 		 	<div class="row">
 			  <div id="jobs-button-col" class="col l6 m6 s6 button-col">
-				<h:commandButton class="btn waves-effect waves-indigo indigo" id="jobs-submit" value="Find Homes">				
+				<h:commandButton class="btn waves-effect waves-indigo indigo" id="jobs-submit" value="Find Jobs">				
 					<f:ajax execute="jobsGroup" render="jobs-status jobs-outputGroup jobs-pagination1 jobs-pagination2" listener="#{appViewController.jobsCall.callAPIWithStart1}" onevent="setTrigger"/>
 				</h:commandButton>
 			  </div>
@@ -272,6 +272,23 @@
 				<p class="right"><h:outputText id="jobs-status" class="status" value="#{appViewController.jobsCall.statusMessage}"/></p>	
 			  </div>		  						
 			</div>	
+			<div class="row">
+			  <div class="col l12 m12 s12 center">
+			    <div class="preloader-wrapper big active">
+				  <div class="spinner-layer spinner-blue-only">
+			        <div class="circle-clipper left">
+			          <div class="circle"></div>
+			        </div>
+			        <div class="gap-patch">
+			          <div class="circle"></div>
+			        </div>
+			        <div class="circle-clipper right">
+			         <div class="circle"></div>
+			        </div>
+				  </div>
+			    </div>
+			  </div>
+			</div>					
 			<div class="row">
 			  <h:panelGroup id="jobs-pagination1" class="col l6 offset-l3 m6 offset-m3">
 			    <h:outputText class="currentPage" value="#{appViewController.jobsCall.pager.currentPage}"/>
@@ -348,11 +365,11 @@
 					      <hr/>
 					      <p><h:outputText value="#{listItem.body}"/></p>
 					      <p id="jobs-collection-links" class="collection-links">
-					      	<h:commandLink class="btn green waves-effect waves-green">
+					      	<h:commandLink class="btn green waves-effect">
 					        	<f:ajax event="click" listener="#{appViewController.jobsCall.setModalListing(listItem)}" render="jobs-listingModal" onevent="showModal"/>
 					        	<i class="material-icons">view_list</i>More Info
 					      	</h:commandLink>
-					      	<h:outputLink value="#{listItem.url}" class="btn waves-effect waves-red"><i class="material-icons">send</i>View This Listing</h:outputLink>
+					      	<h:outputLink value="#{listItem.url}" class="btn waves-effect"><i class="material-icons">send</i>View This Listing</h:outputLink>
 					      </p>
 					    </li>
 				  	  </c:forEach>					   
@@ -436,16 +453,16 @@
 		  <div id="jobs-modal" class="modal listingModal">
 		    <div class="modal-content">
 		      <div class="row">
-		      	<div class="col l12">
+		      	<div class="col l12 m12 s12">
 		      		<h5><h:outputText id="jobs-modal-listing-title" value="#{appViewController.jobsCall.modalListing.title}"/></h5>
 		      		<hr/>
 		      	</div>
 		      </div>
 		      <div class="row">
-		      	<div class="col l4 s12">
+		      	<div class="col l4 m12 s12">
 		      		<h:graphicImage id="jobs-modal-listing-image" class="modal-listing-image" value="#{appViewController.jobsCall.modalListing.images[0].src}" alt="#{appViewController.jobsCall.modalListing.images[0].alt}"/>
 		      	</div>
-		      	<div class="col l8 s12"> 
+		      	<div class="col l8 m12 s12"> 
 		      		<p><strong>Job Title: </strong><h:outputText id="jobs-modal-listing-price" value="#{appViewController.jobsCall.modalListing.attributes.jobTitle}"/></p>
 		      		<p><strong>Address: </strong><h:outputText id="jobs-modal-listing-address" value="#{appViewController.jobsCall.modalListing.location.address}"/></p>
 					<p><strong>City: </strong><h:outputText id="jobs-modal-listing-city" value="#{appViewController.jobsCall.modalListing.location.name}"/></p>
@@ -453,13 +470,13 @@
 		      	</div>
 			  </div>
 		      <div class="row">	      	
-		      	<div class="col l12">
+		      	<div class="col l12 m12 s12">
 		      		<p id="jobs-modal-info" class="modal-info"><strong>Information: </strong><h:outputText id="jobs-modal-listing-body" value="#{appViewController.jobsCall.modalListing.body}"/></p>
 		      	</div>
 			  </div>
 		      <div class="row">	      	
-		      	<div class="col l12">
-		      		<p class="center"><h:outputLink value="#{appViewController.jobsCall.modalListing.url}" class="btn waves-effect waves-green center"><i class="material-icons">send</i>View This Listing</h:outputLink></p>
+		      	<div class="col l12 m12 s12">
+		      		<p class="center"><h:outputLink value="#{appViewController.jobsCall.modalListing.url}" class="btn waves-effect center"><i class="material-icons">send</i>View This Listing</h:outputLink></p>
 		      	</div>
 		      </div>
 		    </div>  

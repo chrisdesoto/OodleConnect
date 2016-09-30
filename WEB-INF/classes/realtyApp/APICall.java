@@ -40,7 +40,12 @@ public abstract class APICall {
 		OodleData objectData = makeObjects(JSON);
 		this.setListings(objectData.getListings());
 		this.setItemsFound(objectData.getMeta().getTotal());
-		setStatusMessage(itemsFound + " listings found");
+		if(objectData.getStat().equalsIgnoreCase("ok")){
+			setStatusMessage(itemsFound + " listings found");
+		}
+		else{
+			setStatusMessage("Error");
+		}
 		this.pager = new Pagination(Integer.parseInt(start), Integer.parseInt(num), itemsFound);
 		
 	}
@@ -72,9 +77,11 @@ public abstract class APICall {
 			in.close();
 		}
 		catch(MalformedURLException e){
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		catch(IOException e){
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 						

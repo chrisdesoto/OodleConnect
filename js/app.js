@@ -10,6 +10,12 @@ $(document).ready(function() {
     $("#realEstate-link").css("background-color", "#eee");
     setActivePage();
     initGoToPageEnterKey();
+    $("input:submit").click(function(){
+        $(".results").css("display", "none");
+        $(".pagination").css("display", "none");
+        $(".go-to-page").css("display", "none");
+        $(".preloader-wrapper.big.active").fadeIn();
+    });
 });
 
 function initGoToPageEnterKey(){
@@ -27,7 +33,7 @@ function setActivePage(){
     var pages = $(".pagination li a");
     for (var i = 1; i < pages.length; i++){
         if(pages.get(i).text == $(".currentPage")[0].innerHTML){
-            pages.get(i).parentNode.style.backgroundColor = '#DC4040';
+            pages.get(i).parentNode.style.backgroundColor = '#216bbf';
             pages.get(i).style.color = '#FFF';
         }
     }
@@ -47,17 +53,27 @@ function setClick(){
 function setTrigger(data){
     if (data.status == "success"){
         $('.modal-trigger, .modal2-trigger').leanModal();
-        fadeResults();
+		$(".preloader-wrapper.big.active").fadeOut().promise().done(
+			function(){
+				fadeResults();
+			}
+		);
         setActivePage();
     }
 };
 
 function fadeResults(){
+	if($(".results li").length == 0){
+		$(".results").css("display", "none");
+        $(".pagination").css("display", "none");
+        $(".go-to-page").css("display", "none");
+	}
     if($(".results li").length > 0){
         $(".results").fadeIn();
         $(".pagination").fadeIn();
         $(".go-to-page").fadeIn();
     }
+    
 };
 
 function showModal(data){
@@ -69,8 +85,8 @@ function showModal(data){
     }
 };
 
-function resetFormFields(data){
-    if (data.status == "success"){
+function resetFormFields(data){	
+    if (data.status == "success"){    	
         $('select').material_select();
         $('.tooltipped').tooltip({delay: 50});
         $('.button-collapse').sideNav();
@@ -78,5 +94,11 @@ function resetFormFields(data){
         setTrigger(data);
         setClick();
         initGoToPageEnterKey();
+        $("input:submit").click(function(){
+            $(".results").css("display", "none");
+            $(".pagination").css("display", "none");
+            $(".go-to-page").css("display", "none");
+            $(".preloader-wrapper.big.active").fadeIn();
+        });        
     }
 };
