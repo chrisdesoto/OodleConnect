@@ -20,8 +20,7 @@ $(document).ready(function() {
 
 function initGoToPageEnterKey(){
     $('.go-to-page-input').find('input').keypress(function(e){
-        if ( e.which == 13 ) // Enter key = keycode 13
-        {
+        if ( e.which == 13 ){
             this.parentNode.getElementsByClassName('goToPageButton')[0].click();
             return false;
         }
@@ -41,11 +40,8 @@ function setActivePage(){
 }
 
 function setClick(){
-
     var displayLink = "#" + $("#displayed").text() + "-link";
-
     $(".side-nav li").css("background-color", "transparent");
-
     $(displayLink).css("background-color", "#eee");
 
 };
@@ -63,6 +59,7 @@ function setTrigger(data){
 };
 
 function fadeResults(){
+	
 	if($(".results li").length == 0){
 		$(".results").css("display", "none");
         $(".pagination").css("display", "none");

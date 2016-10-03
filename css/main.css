@@ -331,14 +331,16 @@ nav .brand-logo i{
 .listingModal .row .col .center .btn{
 	background-color: #ec3872;
 }
-#modal1 .modal-content h4{
+#modal1 .modal-content h2{
 	font-family: 'Poiret One', cursive;
 	color: #216bbf;
 	font-weight: 600;	
+	margin-bottom: 1rem;
 }
 #modal1 .modal-content p.content{
-	min-height: 50px;
-    font-size: 1.1rem;
+	min-height: 50px;    
+    font-size: 1.3rem;
+    font-weight: 300;
     margin: 1rem auto;
 }
 
